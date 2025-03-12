@@ -58,4 +58,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class, 'book_user')->withPivot('number_of_copies', 'bought', 'price');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
 }

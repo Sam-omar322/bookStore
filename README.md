@@ -125,3 +125,13 @@ books - authors = many-to-many
 books - categories = one-to-many
 books - publishers = one-to-many
 books - users = many-to-many
+
+Steps:
+    - Create models for each database
+    - Create Controllers
+    - Link models to relationship
+    - Create Route
+    - Create controller for home page
+    - Create Seeder
+    - Create views
+
