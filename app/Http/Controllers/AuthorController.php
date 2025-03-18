@@ -12,7 +12,25 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::orderBy('name')->get();
+        $title = "All Authors";
+        return view('authors.index', compact('authors', 'title'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $authors = Author::where('name', 'LIKE', "%$query%")->orderBy('name')->get();
+        $title = "Search Results for: " . $query;
+        return view('authors.index', compact('authors', 'title'));
+    }
+
+    public function booksResult(Author $author)
+    {
+        $books = $author->books()->paginate(12);
+        
+        $title = "Author: $author->name";
+        return view('gallery.index', compact('books', 'title'));
     }
 
     /**

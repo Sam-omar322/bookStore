@@ -12,7 +12,25 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        //
+        $publishers = Publisher::orderBy('name')->get();
+        $title = "All Publishers";
+        return view('publishers.index', compact('publishers', 'title'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $publishers = Publisher::where('name', 'LIKE', "%$query%")->orderBy('name')->get();
+        $title = "Search Results for: " . $query;
+        return view('publishers.index', compact('publishers', 'title'));
+    }
+    
+    public function booksResult(Publisher $publisher)
+    {
+        $books = $publisher->books()->paginate(12);
+        
+        $title = "Publisher: $publisher->name";
+        return view('gallery.index', compact('books', 'title'));
     }
 
     /**

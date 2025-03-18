@@ -12,7 +12,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy('name')->get();
+        $title = "All Categories";
+        return view('categories.index', compact('categories', 'title'));
     }
 
     /**
@@ -61,5 +63,28 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+
+
+    // Search Categories
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $categories = Category::where('name', 'LIKE', "%$query%")
+                              ->orderBy('name')->get();
+        $title = "Search Results for: " . $query;
+        return view('categories.index', compact('categories', 'title'));
+    }
+
+    public function booksResult(Category $category)
+    {
+        // This method will fetch from database not good for model route binding
+        //$books = Book::where('category_id', $category->id)->paginate(12);
+
+        // This method will get category from route model binding
+        $books = $category->books()->paginate(12);
+        
+        $title = "Category: $category->name";
+        return view('gallery.index', compact('books', 'title'));
     }
 }

@@ -135,3 +135,32 @@ Steps:
     - Create Seeder
     - Create views
 
+
+Create the views:
+    - layouts/main.blade.php
+    - useing bootstrap for design
+    - add google fonts
+    - use fontawesome
+    - add navigation bar
+    - change route from dashbaord to layouts.main
+    - add user icon dropdown on navigation
+Make Seeders:
+    - Create seeders for auther, book, category, publisher
+Create home page:
+    - Create gallaryController
+    - View books on grid with title from index Gallery Class
+    - Add bootstrap card
+    - Create search route
+    - Create form search on gallary
+Create Inner pages
+    - book page
+    - ordering the book based on categories
+    - categories page
+        - make list function on CategoryController
+            - get all categories sort by name
+            - categories index
+        - Create search fucntion on CategoryController
+            - get categories from query and sortby name
+        - Create index page category
+    - publishers page
+    - authors page
