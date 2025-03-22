@@ -7,6 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,10 +20,17 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('layouts.main');
+    })->name('dashboard');
 });
 
+// Users routes
 Route::get("/", [GalleryController::class, 'index'])->name('gallery.index');
 Route::get("/search", [GalleryController::class, 'search'])->name('gallery.search');
 
@@ -39,19 +48,12 @@ Route::get('/authors', [AuthorController::class, 'list'])->name('gallery.authors
 Route::get('/authors/search', [AuthorController::class, 'search'])->name('gallery.authors.search');
 Route::get("/author/{author}", [AuthorController::class, 'booksResult'])->name('gallery.authors.show');
 
-Route::get("/admin", [AdminController::class, 'index'])->name("admin.index");
-
-Route::resource('admin/books', BookController::class);
-Route::resource('admin/categories', CategoryController::class);
-Route::resource('admin/authors', AuthorController::class);
-Route::resource('admin/publishers', PublisherController::class);
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('layouts.main');
-    })->name('dashboard');
+// Admin routes
+Route::prefix('/admin')->middleware(['auth:sanctum', 'check.update.permission', 'verified'])->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::resource('/books', BookController::class);
+    Route::resource('/categories', CategoryController::class);
+    Route::resource('/authors', AuthorController::class);
+    Route::resource('/publishers', PublisherController::class);
+    Route::resource('/users', UserController::class);
 });

@@ -219,3 +219,6 @@ Create dashbaord
         - Delete cover image before delete book
 
 - Create Resources for all publishers, authors, categories
+- Make a middleware checkUpdatePermission to do not let the user to access on dashboard.
+- Create route for users and views to show table, Update the user role, and delete the Users by admin.
+- admin no one can delete it

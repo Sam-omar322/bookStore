@@ -64,6 +64,10 @@
                             {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
+                            @if (Auth::user()->isAdmin())
+                            <li><a class="dropdown-item" href="{{ route('admin.index') }}">{{ __('Dashbaord') }}</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            @endif
                             <li><a class="dropdown-item" href="{{ route('profile.show') }}">{{ __('Profile') }}</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>

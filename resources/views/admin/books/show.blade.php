@@ -23,7 +23,7 @@
 
                     <ul class="list-group list-group-flush mt-3">
                         <li class="list-group-item"><strong>ISBN:</strong> {{ $book->isbn ?? 'N/A' }}</li>
-                        <li class="list-group-item"><strong>Category:</strong> <a class="text-decoration-none text-dark" href="{{ route('categories.show', $book->category) }}" >{{ $book->category->name ?? 'N/A' }}</a></li>
+                        <li class="list-group-item"><strong>Category:</strong> <a class="text-decoration-none text-dark">{{ $book->category->name ?? 'N/A' }}</a></li>
                         <li class="list-group-item"><strong>Publisher:</strong> {{ $book->publisher->name ?? 'N/A' }}</li>
                         <li class="list-group-item">
                             <strong>Authors:</strong>

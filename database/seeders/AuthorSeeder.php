@@ -16,7 +16,6 @@ class AuthorSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             Author::create([
                 'name' => fake()->name(),
-                'image' => 'author' . $i . '.jpg',
                 'description' => fake()->paragraph(),
             ]);
         }

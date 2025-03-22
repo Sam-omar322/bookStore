@@ -12,7 +12,9 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        //
+        $publishers = Publisher::orderBy('name')->get();
+        $title = 'Publishers Table';
+        return view('admin.publishers.index', compact('publishers', 'title'));
     }
 
     
@@ -21,7 +23,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.publishers.create');
     }
     
     /**
@@ -29,7 +31,16 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, ['name' => 'required']);
+     
+        $publisher = new Publisher;
+        $publisher->name = $request->name;
+        $publisher->address = $request->address;
+        $publisher->save();
+     
+        session()->flash('flash_message',  'Publisher added successfully');
+     
+        return redirect(route('publishers.index'));
     }
     
     /**
@@ -45,7 +56,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        //
+        return view('admin.publishers.edit', compact('publisher'));
     }
     
     /**
@@ -53,7 +64,15 @@ class PublisherController extends Controller
      */
     public function update(Request $request, Publisher $publisher)
     {
-        //
+        $this->validate($request, ['name' => 'required']);
+     
+        $publisher->name = $request->name;
+        $publisher->address = $request->address;
+        $publisher->save();
+     
+        session()->flash('flash_message',  'Publisher updated successfully');
+     
+        return redirect(route('publishers.index'));
     }
     
     /**
@@ -61,7 +80,11 @@ class PublisherController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
-        //
+        $publisher->delete();
+     
+        session()->flash('flash_message','Publisher deleted successfully');
+     
+        return redirect(route('publishers.index'));
     }
 
     // List Publishers

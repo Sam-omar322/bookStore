@@ -12,7 +12,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::orderBy('name')->get();
+        $title = "Authors Table";
+        return view('admin.authors.index', compact('authors', 'title'));
     }
 
     
@@ -21,7 +23,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.authors.create');
     }
 
     /**
@@ -29,7 +31,16 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, ['name' => 'required']);
+     
+        $author = new Author;
+        $author->name = $request->name;
+        $author->description = $request->description;
+        $author->save();
+     
+        session()->flash('flash_message',  'Author successfully added!');
+     
+        return redirect(route('authors.index'));
     }
     
     /**
@@ -45,7 +56,7 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        return view('admin.authors.edit', compact('author'));
     }
     
     /**
@@ -53,7 +64,15 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $this->validate($request, ['name' => 'required']);
+     
+        $author->name = $request->name;
+        $author->description = $request->description;
+        $author->save();
+     
+        session()->flash('flash_message',  'Author successfully updated!');
+     
+        return redirect(route('authors.index'));
     }
     
     /**
@@ -61,7 +80,11 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete();
+     
+        session()->flash('flash_message','Author successfully deleted!');
+     
+        return redirect(route('authors.index'));
     }
 
     // List Authors
