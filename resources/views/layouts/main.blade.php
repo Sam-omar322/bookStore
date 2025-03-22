@@ -34,17 +34,17 @@
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                     <li class="nav-item">
-                    <a class="nav-link {{ Route::is('categories*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
+                    <a class="nav-link {{ request()->is('categories*') ? 'active' : '' }}" href="{{ route('gallery.categories.index') }}">
                             <i class="fas fa-layer-group me-1"></i> {{ __('Categories') }}
                         </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link {{ Route::is('publishers*') ? 'active' : '' }}" href="{{ route('publishers.index') }}">
+                    <a class="nav-link {{ request()->is('publishers*') ? 'active' : '' }}" href="{{ route('gallery.publishers.index') }}">
                             <i class="fas fa-building me-1"></i> {{ __('Publishers') }}
                         </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link {{ Route::is('authors*') ? 'active' : '' }}" href="{{ route('authors.index') }}">
+                    <a class="nav-link {{ request()->is('authors*') ? 'active' : '' }}" href="{{ route('gallery.authors.index') }}">
                             <i class="fas fa-user-pen me-1"></i> {{ __('Authors') }}
                         </a>
                     </li>

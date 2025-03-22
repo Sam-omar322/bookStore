@@ -164,3 +164,58 @@ Create Inner pages
         - Create index page category
     - publishers page
     - authors page
+
+Create dashbaord
+    - Create theme on views folder
+        - default main page
+        - footer section
+        - header section
+        - sidebar section
+    - Dashbaord Sidebar items:
+        - Logo site
+        - mainPage analises
+        - books table
+        - publishers table
+        - authors table
+        - categories table
+        - Users table
+        - Selles
+    - Add flash message on begin page content when Session has
+    - Add @yield('title')
+
+    - Create adminsController
+        - Index-return, books, authors, categories, authors count.
+        - Create /admin route adminCont
+        - Create admin/index views
+    - Create route /admin/books BookController
+        - Create view inside admin books/index
+        - Create button delete form on books table
+        - Create column edit button on books table
+        - Use datatables.net
+        - Arabic.json cdn
+    - Create route admin/books/create
+        - Create view admin/books/create
+        - On create function on bookController return all publishers, categories, authors
+        - Create form create new book with /@error
+    - Create Post route admin/books on store function
+        - Add intervention image for edit image
+        - Create App/Traits/ImageUploadTrait.php
+        - Use imageuploadtraits
+        - Use attach function for create author_book
+        - Add session flash “book created successfully “
+        - Add image holder to show user the image choosed with Javascript
+    
+    - Create route admin/books/{book}
+        - Create view admin/books/show
+    
+    - Create route admin/books/{book} /edit
+        - Create view admin/books/edit
+        - Create patch route admin/books/{book} for update
+        - On update function Check image before update book
+        - Detach authors before update book
+        - Check for isbn isDirty before update book
+
+    - Create delete route admin/books/{book}
+        - Delete cover image before delete book
+
+- Create Resources for all publishers, authors, categories

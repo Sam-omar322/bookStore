@@ -12,27 +12,10 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::orderBy('name')->get();
-        $title = "All Authors";
-        return view('authors.index', compact('authors', 'title'));
+        //
     }
 
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-        $authors = Author::where('name', 'LIKE', "%$query%")->orderBy('name')->get();
-        $title = "Search Results for: " . $query;
-        return view('authors.index', compact('authors', 'title'));
-    }
-
-    public function booksResult(Author $author)
-    {
-        $books = $author->books()->paginate(12);
-        
-        $title = "Author: $author->name";
-        return view('gallery.index', compact('books', 'title'));
-    }
-
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -48,7 +31,7 @@ class AuthorController extends Controller
     {
         //
     }
-
+    
     /**
      * Display the specified resource.
      */
@@ -64,7 +47,7 @@ class AuthorController extends Controller
     {
         //
     }
-
+    
     /**
      * Update the specified resource in storage.
      */
@@ -72,12 +55,35 @@ class AuthorController extends Controller
     {
         //
     }
-
+    
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Author $author)
     {
         //
+    }
+
+    // List Authors
+    public function list()
+    {
+        $authors = Author::orderBy('name')->get();
+        $title = "Authors";
+        return view('authors.index', compact('authors', 'title'));
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $authors = Author::where('name', 'LIKE', "%$query%")->orderBy('name')->get();
+        $title = "Search Results for: " . $query;
+        return view('authors.index', compact('authors', 'title'));
+    }
+
+    public function booksResult(Author $author)
+    {
+        $books = $author->books()->paginate(12);
+        
+        $title = "Author: $author->name";
+        return view('gallery.index', compact('books', 'title'));
     }
 }

@@ -12,9 +12,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('name')->get();
-        $title = "All Categories";
-        return view('categories.index', compact('categories', 'title'));
+        //
     }
 
     /**
@@ -65,7 +63,13 @@ class CategoryController extends Controller
         //
     }
 
-
+    // List Categories
+    public function list()
+    {
+        $categories = Category::orderBy('name')->get();
+        $title = "Categories";
+        return view('categories.index', compact('categories', 'title'));
+    }
     // Search Categories
     public function search(Request $request)
     {
