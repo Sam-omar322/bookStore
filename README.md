@@ -218,7 +218,25 @@ Create dashbaord
     - Create delete route admin/books/{book}
         - Delete cover image before delete book
 
-- Create Resources for all publishers, authors, categories
-- Make a middleware checkUpdatePermission to do not let the user to access on dashboard.
-- Create route for users and views to show table, Update the user role, and delete the Users by admin.
-- admin no one can delete it
+    - Create Resources for all publishers, authors, categories
+    - Make a middleware checkUpdatePermission to do not let the user to access on dashboard.
+    - Create route for users and views to show table, Update the user role, and delete the Users by admin.
+    - admin no one can delete it
+
+Rating
+- Create model for Rating
+- create rate, ratings function on Book model
+- sum all ratings and divide on itself on rate function
+- create rated, ratings, bookRating function on user modal
+- Create 5 stars on book card
+- add style css on stars
+- Create POST route /book/{book}/rate
+- create rate functino on bookController
+- @auth Create form after check (if user rated this book ?) for user to rate book on books details
+- Add style css on rating-stars
+- Send rate request from AJAX to avoid page refresh
+- Go to link ajax.googleapis.com
+- Add the script link into main.layout
+- Create ajax script into book details
+- Add meta token into main.layout head tag
+- Add toastr.js and toastr.css cdn into main.layout

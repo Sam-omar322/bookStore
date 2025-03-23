@@ -64,13 +64,23 @@ class User extends Authenticatable
         return $this->belongsToMany(Book::class, 'book_user')->withPivot('number_of_copies', 'bought', 'price');
     }
 
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
     public function ratings()
     {
         return $this->hasMany(Rating::class);
     }
 
-    public function isAdmin()
+    public function rated(Book $book)
     {
-        return $this->role === 'admin';
+        return $this->ratings->where('book_id', $book->id)->isNotEmpty();
+    }
+
+    public function bookRating(Book $book)
+    {
+        return $this->rated($book) ? $this->ratings->where('book_id', $book->id)->first() : NULL;
     }
 }

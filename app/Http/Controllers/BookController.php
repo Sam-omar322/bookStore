@@ -10,6 +10,7 @@ use App\Models\Author;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Rating;
 
 class BookController extends Controller
 {
@@ -182,5 +183,21 @@ class BookController extends Controller
 
     public function details(Book $book) {
         return view('book.details', compact('book'));
+    }
+
+    public function rate(Request $request, Book $book)
+    {
+        if(auth()->user()->rated($book)) {
+            $rating = Rating::where(['user_id' => auth()->user()->id, 'book_id' => $book->id])->first();
+            $rating->value = $request->value;
+            $rating->save();
+        } else {
+            $rating = new Rating;
+            $rating->user_id = auth()->user()->id;
+            $rating->book_id = $book->id;
+            $rating->value = $request->value;
+            $rating->save();
+        }
+        return back();
     }
 }

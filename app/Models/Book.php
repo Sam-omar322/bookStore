@@ -39,4 +39,9 @@ class Book extends Model
     {
         return $this->hasMany(Rating::class);
     }
+
+    public function rate()
+    {
+        return $this->ratings->isNotEmpty() ? $this->ratings()->sum('value') / $this->ratings()->count() : 0;
+    }
 }
