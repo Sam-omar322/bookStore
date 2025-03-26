@@ -8,6 +8,7 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,3 +59,8 @@ Route::prefix('/admin')->middleware(['auth:sanctum', 'check.update.permission', 
     Route::resource('/publishers', PublisherController::class);
     Route::resource('/users', UserController::class);
 });
+
+Route::post("/cart", [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+Route::post('/removeOne/{book}', [CartController::class, 'removeOne'])->name('cart.remove_one');
+Route::post('/removeAll/{book}', [CartController::class, 'removeAll'])->name('cart.remove_all');

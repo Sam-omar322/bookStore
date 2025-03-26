@@ -19,6 +19,10 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+        .bg-cart {
+            background-color: #ffc107;
+            color: #fff
+        }
         .score {
             display: block;
             font-size: 16px;
@@ -59,6 +63,19 @@
 
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('cart.view') }}">
+                                <i class="fas fa-shopping-cart"></i> 
+                                    Cart 
+                                @if(Auth::user()->booksInCart()->count() > 0)
+                                    <span class="badge bg-secondary cart-count">{{ Auth::user()->booksInCart()->count() }}</span>
+                                @else
+                                    <span class="badge bg-secondary cart-count">0</span>
+                                @endif
+                            </a>
+                        </li>
+                    @endauth
                     <li class="nav-item">
                     <a class="nav-link {{ request()->is('categories*') ? 'active' : '' }}" href="{{ route('gallery.categories.index') }}">
                             <i class="fas fa-layer-group me-1"></i> {{ __('Categories') }}

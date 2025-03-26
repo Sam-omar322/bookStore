@@ -240,3 +240,32 @@ Rating
 - Create ajax script into book details
 - Add meta token into main.layout head tag
 - Add toastr.js and toastr.css cdn into main.layout
+
+Cart
+- Create post route to addToCart
+    - Create function bookInCart on user model return book
+    - Create cartController 
+    - Add middleware auth for cartController
+    - Create button for add to cart on book details
+    - Add some CSS style on .bg-cart
+    - Create AJAX script for add book to cart
+    - Create cart icon and redirect to cart.view if user auth on main.layout
+    - Add couter on cart icon
+- Create get Route /cart with name cart.view
+    - Add href on cart button on navbar
+    - Create Post Route /removeOne/{book} with name cart.remove_one
+    - Create Post Route /removeAll/{book} with name cart.remove_all
+    - Create viewCart function on CartController
+    - Create removeOne function on CartController
+    - Create removeAll function on CartController
+    - Create cart view
+Create payment with paypal
+    - Get the script from paypal dev and add to cart page
+    - Create paypal account
+    - Create paypal sandbox
+    - Create business account and link into project
+    - Add srmk live laravel paypal
+    - Add srmk config into .env
+    - Create API paypal route
+    - create PurchaseController
+    - create createPayment, ExecutePayment function PurchaseController

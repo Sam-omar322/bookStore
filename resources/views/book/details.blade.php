@@ -95,13 +95,6 @@
                         </li>
                         <li class="list-group-item"><strong>Price:</strong> ${{ number_format($book->price, 2) }}</li>
                         <li class="list-group-item"><strong>Copies Available:</strong> {{ $book->number_of_copies }}</li>
-                        <li class="list-group-item"><strong>Bought:</strong>
-                            @if($book->bought)
-                                <span class="badge bg-success">Yes</span>
-                            @else
-                                <span class="badge bg-secondary">No</span>
-                            @endif
-                        </li>
                     </ul>
                 </div>
 
@@ -114,7 +107,15 @@
                     @else
                     <i class="fas fa-book-open fa-7x text-primary mb-4"></i>
                     @endif
-                    <a href="#" class="btn btn-outline-primary mt-3">Buy Now</a>
+                    @auth
+                        <div class="form text-center mt-3">
+                            <input id="bookId" type="hidden" value="{{ $book->id }}">
+                            <button type="submit" class="btn bg-cart addCart me-2"><i class="fa fa-cart-plus"></i> أضف للسلة</button>
+                            <span class="text-muted mb-3"><input class="form-control d-inline mx-auto" id="quantity" name="quantity" type="number" value="1" min="1" max="{{ $book->number_of_copies }}" style="width:30%;" required></span> 
+                        </div>
+                    @else
+                        <a href="#" class="btn btn-outline-primary mt-3">Login To Buy</a>
+                    @endauth
                 </div>
             </div>
 
@@ -170,4 +171,35 @@
             });
         });
     </script>
+
+
+<script>
+         $('.addCart').on('click', function(event) {
+            var token = '{{ Session::token() }}';
+            var url = "{{ route('cart.add') }}";
+
+            event.preventDefault();
+
+            var bookId = $(this).parents(".form").find("#bookId").val()
+            var quantity = $(this).parents(".form").find("#quantity").val()
+
+
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: {
+                    quantity: quantity, 
+                    id: bookId,
+                    _token: token
+                },
+                success : function(data) {            
+                    $('span.badge').text(data.num_of_product);
+                    toastr.success('Book added to cart successfully');
+                },
+                error: function() {
+                    alert('Somthing went wrong!');
+                }
+            })  
+        });
+</script>
 @endsection

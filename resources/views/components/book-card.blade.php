@@ -43,9 +43,47 @@
         <h5 class="text-center mt-auto mb-3">${{ $book->price }}</h5>
 
         <div>
-            <a href="#" class="btn btn-primary w-100">
-                <i class="fas fa-cart-plus me-1"></i> Add to Cart
-            </a>
+            @auth
+            <div class="form">
+                <input id="bookId" type="hidden" value="{{ $book->id }}">
+                <input class="form-control d-inline mx-auto" id="quantity" name="quantity" type="hidden" value="1" min="1" max="{{ $book->number_of_copies }}" style="width:30%;" required>
+                <button type="submit" class="btn btn-primary w-100 addCart">
+                    <i class="fas fa-cart-plus me-1"></i> Add to Cart
+                </button>
+            </div>
+            @endauth
         </div>
     </div>
 </div>
+
+@section('script')
+<script>
+         $('.addCart').on('click', function(event) {
+            var token = '{{ Session::token() }}';
+            var url = "{{ route('cart.add') }}";
+
+            event.preventDefault();
+
+            var bookId = $(this).parents(".form").find("#bookId").val()
+            var quantity = $(this).parents(".form").find("#quantity").val()
+
+
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: {
+                    quantity: quantity, 
+                    id: bookId,
+                    _token: token
+                },
+                success : function(data) {            
+                    $('span.badge').text(data.num_of_product);
+                    alert('Book added to cart successfully');
+                },
+                error: function() {
+                    alert('Somthing went wrong!');
+                }
+            })  
+        });
+</script>
+@endsection
