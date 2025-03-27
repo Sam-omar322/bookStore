@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,3 +65,6 @@ Route::post("/cart", [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 Route::post('/removeOne/{book}', [CartController::class, 'removeOne'])->name('cart.remove_one');
 Route::post('/removeAll/{book}', [CartController::class, 'removeAll'])->name('cart.remove_all');
+
+Route::get('/checkout', [PurchaseController::class, 'creditCheckout'])->name('credit.checkout');
+Route::post('/checkout', [PurchaseController::class, 'purchase'])->name('products.purchase');

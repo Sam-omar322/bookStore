@@ -70,7 +70,7 @@
                         <div id="paypal-button-container"></div>
                         <p id="result-message"></p>
 
-                        <a href="#" class="btn btn-primary ms-3">
+                        <a href="{{ route('credit.checkout') }}" class="btn btn-primary ms-3">
                             <i class="fas fa-credit-card"></i> Pay with Credit Card
                         </a>
                     </div>

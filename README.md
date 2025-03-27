@@ -269,3 +269,22 @@ Create payment with paypal
     - Create API paypal route
     - create PurchaseController
     - create createPayment, ExecutePayment function PurchaseController
+Create payment with Stripe
+    - Install laravel casher
+    - signup stripe account
+    - Add stripe key and secrect key from stripe dashboard
+    - Add use Billable on user model
+    - Create function CreditCheckout on PurchaseController
+    - Create Credit folder on view
+    - Create file Checkout.blade.php
+    - Create Route /checkout for checkout view with name credit.checkout
+    - Create post Route /checkout for purchase function with name products.purchase
+    - Create purchase function on PurchaseController
+Send Email for complate the payment
+    - using MailTrap
+    - Add mailtrap config into .evn
+    - Create mail OrderMail
+    - Create view mails.order-mail
+    - use OrderMail, Mail into PurchaseController
+    - Create Mail function
+    - 

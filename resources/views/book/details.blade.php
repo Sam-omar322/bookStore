@@ -114,7 +114,7 @@
                             <span class="text-muted mb-3"><input class="form-control d-inline mx-auto" id="quantity" name="quantity" type="number" value="1" min="1" max="{{ $book->number_of_copies }}" style="width:30%;" required></span> 
                         </div>
                     @else
-                        <a href="#" class="btn btn-outline-primary mt-3">Login To Buy</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary mt-3">Login To Buy</a>
                     @endauth
                 </div>
             </div>
