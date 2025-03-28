@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+            <a class="nav-link {{ request()->is('admin/allorders*') ? 'active' : '' }}" href="{{ route('admin.allorders') }}">
                     <i class="fas fa-shopping-cart"></i><span class="menu-text"> Sales</span>
                 </a>
             </li>

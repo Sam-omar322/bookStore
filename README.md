@@ -287,4 +287,21 @@ Send Email for complate the payment
     - Create view mails.order-mail
     - use OrderMail, Mail into PurchaseController
     - Create Mail function
-    - 
+Fix rated system
+    - create ratedpurches on User modal
+    - update details function on bookController
+    - Update details book view
+    - Use Auth to BookController
+Add order views
+    - create purchaseProduct function on user modal
+    - Create route for myOrders
+    - Update main view navlink myOrders
+    - Create myOrders function on PurchaseController
+    - Create myOrders view
+Create admin purchase page
+    - Create Shopping modal
+    - Create route admin/allOrders
+    - Update sidebar view
+    - Create function allOrders on PurchaseController
+    - use shopping modal to Purchase Controller
+    - Create view allOrders on admin/books

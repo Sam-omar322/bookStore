@@ -59,6 +59,7 @@ Route::prefix('/admin')->middleware(['auth:sanctum', 'check.update.permission', 
     Route::resource('/authors', AuthorController::class);
     Route::resource('/publishers', PublisherController::class);
     Route::resource('/users', UserController::class);
+    Route::get("/allOrders", [PurchaseController::class, 'allOrders'])->name('admin.allorders');
 });
 
 Route::post("/cart", [CartController::class, 'addToCart'])->name('cart.add');
@@ -68,3 +69,5 @@ Route::post('/removeAll/{book}', [CartController::class, 'removeAll'])->name('ca
 
 Route::get('/checkout', [PurchaseController::class, 'creditCheckout'])->name('credit.checkout');
 Route::post('/checkout', [PurchaseController::class, 'purchase'])->name('products.purchase');
+
+Route::get("myOrders", [PurchaseController::class, 'myOrders'])->name('myorders');

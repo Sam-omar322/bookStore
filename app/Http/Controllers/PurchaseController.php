@@ -8,6 +8,7 @@ use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Carbon\Carbon;
 use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Shopping;
 
 class PurchaseController extends Controller
 {
@@ -62,7 +63,7 @@ class PurchaseController extends Controller
         if($result['status'] === 'COMPLETED') {
             $user = User::find($data['userId']);
             $books = $user->booksInCart;
-            // $this->sendOrderConfirmationMail($books, auth()->user());
+            $this->sendOrderConfirmationMail($books, auth()->user());
 
             foreach($books as $book) {
                 $bookPrice = $book->price;
@@ -119,5 +120,17 @@ class PurchaseController extends Controller
         }
 
         return redirect('/cart')->with('message', 'The product has been successfully purchased.');   
+    }
+
+    public function myOrders() {
+        $userId = auth()->user()->id;
+        $myBooks = User::find($userId)->purchedProduct;
+
+        return view('book.myorders', compact('myBooks'));
+    }
+
+    public function allOrders() {
+        $allBooks = shopping::with(['user', 'book'])->where('bought', true)->get();
+        return view('admin.books.allOrders', compact('allBooks'));
     }
 }

@@ -11,6 +11,8 @@ use App\Traits\ImageUploadTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Rating;
+use Illuminate\Support\Facades\Auth;
+
 
 class BookController extends Controller
 {
@@ -181,8 +183,13 @@ class BookController extends Controller
         return redirect()->route('books.index');
     }
 
-    public function details(Book $book) {
-        return view('book.details', compact('book'));
+    public function details(Book $book)
+    {
+        $bookfind = 0;
+        if (Auth::check()) {
+            $bookfind = auth()->user()->ratedpurches()->where('book_id', $book->id)->first();
+        }
+        return view('book.details', compact('book', 'bookfind'));
     }
 
     public function rate(Request $request, Book $book)

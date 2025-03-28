@@ -110,7 +110,7 @@
                     @auth
                         <div class="form text-center mt-3">
                             <input id="bookId" type="hidden" value="{{ $book->id }}">
-                            <button type="submit" class="btn bg-cart addCart me-2"><i class="fa fa-cart-plus"></i> أضف للسلة</button>
+                            <button type="submit" class="btn bg-cart addCart me-2"><i class="fa fa-cart-plus"></i> Add To Cart</button>
                             <span class="text-muted mb-3"><input class="form-control d-inline mx-auto" id="quantity" name="quantity" type="number" value="1" min="1" max="{{ $book->number_of_copies }}" style="width:30%;" required></span> 
                         </div>
                     @else
@@ -120,24 +120,30 @@
             </div>
 
             <div class="row justify-content-center mt-5">
-                <div class="col-md-5 offset-md-3">
+                <div class="col-md-6 text-center">
                     @auth
                         <h4 class="mb-3">Rate This book<h4>
-                        @if(auth()->user()->rated($book))
-                            <div class="rating">
-                                <span class="rating-star {{ auth()->user()->bookRating($book)->value == 5 ? 'checked' : '' }}" data-value="5"></span>
-                                <span class="rating-star {{ auth()->user()->bookRating($book)->value == 4 ? 'checked' : '' }}" data-value="4"></span>
-                                <span class="rating-star {{ auth()->user()->bookRating($book)->value == 3 ? 'checked' : '' }}" data-value="3"></span>
-                                <span class="rating-star {{ auth()->user()->bookRating($book)->value == 2 ? 'checked' : '' }}" data-value="2"></span>
-                                <span class="rating-star {{ auth()->user()->bookRating($book)->value == 1 ? 'checked' : '' }}" data-value="1"></span>
-                            </div>
+                        @if ($bookfind)
+                            @if(auth()->user()->rated($book))
+                                <div class="rating">
+                                    <span class="rating-star {{ auth()->user()->bookRating($book)->value == 5 ? 'checked' : '' }}" data-value="5"></span>
+                                    <span class="rating-star {{ auth()->user()->bookRating($book)->value == 4 ? 'checked' : '' }}" data-value="4"></span>
+                                    <span class="rating-star {{ auth()->user()->bookRating($book)->value == 3 ? 'checked' : '' }}" data-value="3"></span>
+                                    <span class="rating-star {{ auth()->user()->bookRating($book)->value == 2 ? 'checked' : '' }}" data-value="2"></span>
+                                    <span class="rating-star {{ auth()->user()->bookRating($book)->value == 1 ? 'checked' : '' }}" data-value="1"></span>
+                                </div>
+                            @else
+                                <div class="rating">
+                                    <span class="rating-star" data-value="5"></span>
+                                    <span class="rating-star" data-value="4"></span>
+                                    <span class="rating-star" data-value="3"></span>
+                                    <span class="rating-star" data-value="2"></span>
+                                    <span class="rating-star" data-value="1"></span>
+                                </div>
+                            @endif
                         @else
-                            <div class="rating">
-                                <span class="rating-star" data-value="5"></span>
-                                <span class="rating-star" data-value="4"></span>
-                                <span class="rating-star" data-value="3"></span>
-                                <span class="rating-star" data-value="2"></span>
-                                <span class="rating-star" data-value="1"></span>
+                            <div class="alert alert-danger" role="alert">
+                                <span>You must purchase the book to rate it.</span>
                             </div>
                         @endif
                     @endauth

@@ -91,11 +91,13 @@
                             <i class="fas fa-user-pen me-1"></i> {{ __('Authors') }}
                         </a>
                     </li>
+                    @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('myorders') }}">
                             <i class="fas fa-box-open me-1"></i> {{ __('My Orders') }}
                         </a>
                     </li>
+                    @endauth
                 </ul>
 
                 {{-- User Dropdown --}}

@@ -91,4 +91,13 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Book')->withPivot(['number_of_copies', 'bought', 'price'])->wherePivot('bought', False);
     }
 
+    public function ratedpurches()
+    {
+        return $this->belongsToMany('App\Models\Book')->withPivot(['bought'])->wherePivot('bought', true);
+    }
+
+    public function purchedProduct()
+    {
+        return $this->belongsToMany('App\Models\Book')->withPivot(['number_of_copies', 'bought', 'price', 'created_at'])->orderBy('pivot_created_at','desc')->wherePivot('bought', true);
+    }
 }
